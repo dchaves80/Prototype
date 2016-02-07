@@ -1,22 +1,47 @@
 fileFormatVersion: 2
-guid: e413088a3a8859a41ba4c712d21c5e54
-timeCreated: 1454641959
+guid: 90680222f65060248befb8cdddbe81c7
+timeCreated: 1454824207
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Esfera
-    100002: Esfera_2
-    100004: //RootNode
-    400000: Esfera
-    400002: Esfera_2
-    400004: //RootNode
+    100000: "Cielo_F\xEDsico"
+    100002: Cielo_Nulo
+    100004: Esfera
+    100006: Esfera_1
+    100008: Esfera_2
+    100010: Esfera_3
+    100012: Luna
+    100014: Luz_del_Sol
+    100016: Luz_Lunar
+    100018: Origen_del_Efecto_de_Lentes
+    100020: //RootNode
+    100022: Plano_de_Sombras
+    100024: Sky_Dome
+    100026: Sol
+    400000: "Cielo_F\xEDsico"
+    400002: Cielo_Nulo
+    400004: Esfera
+    400006: Esfera_1
+    400008: Esfera_2
+    400010: Esfera_3
+    400012: Luna
+    400014: Luz_del_Sol
+    400016: Luz_Lunar
+    400018: Origen_del_Efecto_de_Lentes
+    400020: //RootNode
+    400022: Plano_de_Sombras
+    400024: Sky_Dome
+    400026: Sol
     2300000: Esfera
-    2300002: Esfera_2
+    2300002: Esfera_1
+    2300004: Esfera_2
     3300000: Esfera
-    3300002: Esfera_2
-    4300000: Esfera_2
-    4300002: Esfera
+    3300002: Esfera_1
+    3300004: Esfera_2
+    4300000: Esfera_1
+    4300002: Esfera_2
+    4300004: Esfera
   materials:
     importMaterials: 1
     materialName: 0

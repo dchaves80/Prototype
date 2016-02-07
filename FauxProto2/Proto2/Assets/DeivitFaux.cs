@@ -27,7 +27,10 @@ public class DeivitFaux : MonoBehaviour {
 				dir = dir.normalized;
 				Rigidbody RB = GO.GetComponent<Rigidbody>();
 				float Distance = Vector3.Distance(transform.position,GO.transform.position);
-				RB.AddForce(((Gravity*dir)/Distance)*MASS,ForceMode.Force);
+
+                
+
+				RB.AddForce((dir * Gravity) * (RB.mass * MASS) / (Mathf.Pow(Distance,2f)-transform.lossyScale.x),ForceMode.Force);
 
 			}
 		}
