@@ -15,6 +15,12 @@ public class DeivitFaux : MonoBehaviour {
 			MASS = MyRigidBody.mass;
 		}
 
+        if (Objects != null && Objects.Count > 0) 
+        {
+            Force MYFORCE = Objects[0].GetComponent<Force>();
+            MYFORCE.Planet = gameObject;
+        }
+
 	}
 	
 	// Update is called once per frame

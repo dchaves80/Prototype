@@ -11,6 +11,9 @@ public class Force : MonoBehaviour {
     public float FORCE;
     bool showGUI = true;
     Rigidbody thisrigidbody;
+    ParticleSystem Emitter;
+    public GameObject Planet;
+    public float Distance;
     void OnGUI() 
     {
         if (showGUI)
@@ -34,19 +37,48 @@ public class Force : MonoBehaviour {
 
 	void Start () {
         thisrigidbody = gameObject.GetComponent<Rigidbody>();
+        Transform TransformEmitter = this.transform.FindChild("PS");
+        Emitter = TransformEmitter.gameObject.GetComponent<ParticleSystem>();
+        Emitter.Stop();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-       
+
+        if (Planet != null) 
+        {
+      Distance = Vector3.Distance(Planet.transform.position, this.transform.position);
+      thisrigidbody.drag = 10f / Distance;
+      if (thisrigidbody.drag < 0.001f) 
+      {
+          Planet = null;
+      }
+        }
         
 
         if (LanzamientoON == true) 
         {
-            if (FORCE < 0.1f) { FORCE = 0f; }
+            
+           
+
+            if (FORCE < 0.1f) { FORCE = 0f;
+            if (Emitter.isPlaying) 
+            {
+                Emitter.Stop();
+            }
+            } else 
+            {
+                if (!Emitter.isPlaying)
+                {
+                    Emitter.Play();
+                }
+               
+            }
             showGUI = false;
             FORCE = Mathf.Lerp(FORCE, 0F, Time.deltaTime/10f);
             thisrigidbody.AddRelativeForce(FORCE*Vector3.up);
+
+
 
         }
 
@@ -61,5 +93,25 @@ public class Force : MonoBehaviour {
         {
             thisrigidbody.AddRelativeTorque(20f*Vector3.right);
         }
+
+             if (Input.GetKey(KeyCode.W))
+             {
+                 thisrigidbody.AddRelativeTorque(20f * Vector3.forward);
+
+             }
+             if (Input.GetKey(KeyCode.S))
+             {
+                 thisrigidbody.AddRelativeTorque(20f * Vector3.back);
+             }
+
+             if (Input.GetKey(KeyCode.Q))
+             {
+                 thisrigidbody.AddRelativeTorque(20f * Vector3.up);
+
+             }
+             if (Input.GetKey(KeyCode.E))
+             {
+                 thisrigidbody.AddRelativeTorque(20f * Vector3.down);
+             }
 	}
 }
