@@ -7,6 +7,7 @@ public class DeivitFaux : MonoBehaviour {
 	public List<GameObject> Objects;
 	public float Gravity;
 	Rigidbody MyRigidBody;
+    public bool ActivarAtmosfera;
 	float MASS = 0;
 	// Use this for initialization
 	void Start () {
@@ -15,7 +16,9 @@ public class DeivitFaux : MonoBehaviour {
 			MASS = MyRigidBody.mass;
 		}
 
-        if (Objects != null && Objects.Count > 0) 
+
+
+        if (Objects != null && Objects.Count > 0 && ActivarAtmosfera==true) 
         {
             Force MYFORCE = Objects[0].GetComponent<Force>();
             MYFORCE.Planet = gameObject;
@@ -36,7 +39,7 @@ public class DeivitFaux : MonoBehaviour {
 
                 
 
-				RB.AddForce((dir * Gravity) * (RB.mass * MASS) / (Mathf.Pow(Distance,2f)-transform.lossyScale.x),ForceMode.Force);
+				RB.AddForce((dir * Gravity) * (RB.mass * MASS) / (Mathf.Pow(Distance,2f)),ForceMode.Force);
 
 			}
 		}

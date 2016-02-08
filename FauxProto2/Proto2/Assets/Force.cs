@@ -6,25 +6,31 @@ public class Force : MonoBehaviour {
 	// Use this for initialization
 
     Rect MyWindow = new Rect(0f, 0f, 200f, 200f);
-    string StringForce = "0";
+    string StringForce = "Fuerza Motor";
+    string StringFuel = "Combustible";
     bool LanzamientoON = false;
     public float FORCE;
+    public float FUEL;
     bool showGUI = true;
     Rigidbody thisrigidbody;
     ParticleSystem Emitter;
     public GameObject Planet;
     public float Distance;
+    
     void OnGUI() 
     {
         if (showGUI)
         {
-            MyWindow = GUI.Window(0, MyWindow, DoMyWindow, "Fuerza");
-            Rect TextField = new Rect(MyWindow.x + 10f, MyWindow.y + 30f, 100f, 30f);
+            MyWindow = GUI.Window(0, MyWindow, DoMyWindow, "Configuraciones");
+            Rect TextField = new Rect(MyWindow.x + 50f, MyWindow.y + 30f, 100f, 30f);
             StringForce = GUI.TextField(TextField, StringForce);
-            if (GUI.Button(new Rect(MyWindow.x + 100, MyWindow.y + 30, 100f, 30f), "Lanzar!"))
+            Rect TextField2 = new Rect(TextField.x, TextField.y + 50f, 100f, 30f);
+            StringFuel = GUI.TextField(TextField2, StringFuel);
+            if (GUI.Button(new Rect(TextField2.x, TextField2.y+50f, 100f, 30f), "Lanzar!"))
             {
                 LanzamientoON = true;
                 FORCE = float.Parse(StringForce);
+                FUEL = float.Parse(StringFuel);
             }
         }
             
@@ -61,11 +67,12 @@ public class Force : MonoBehaviour {
             
            
 
-            if (FORCE < 0.1f) { FORCE = 0f;
+            if (FUEL < 0.1f) { FUEL = 0f;
             if (Emitter.isPlaying) 
             {
                 Emitter.Stop();
             }
+            FORCE = 0f;
             } else 
             {
                 if (!Emitter.isPlaying)
@@ -75,7 +82,7 @@ public class Force : MonoBehaviour {
                
             }
             showGUI = false;
-            FORCE = Mathf.Lerp(FORCE, 0F, Time.deltaTime/10f);
+            FUEL = FUEL - Time.deltaTime;
             thisrigidbody.AddRelativeForce(FORCE*Vector3.up);
 
 
