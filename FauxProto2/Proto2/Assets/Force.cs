@@ -16,6 +16,10 @@ public class Force : MonoBehaviour {
     ParticleSystem Emitter;
     public GameObject Planet;
     public float Distance;
+    public Vector3 Speed;
+    public float Angle;
+    public bool ReadAtmosphere;
+    public float RocketTorque=0f;
     
     void OnGUI() 
     {
@@ -46,44 +50,57 @@ public class Force : MonoBehaviour {
         Transform TransformEmitter = this.transform.FindChild("PS");
         Emitter = TransformEmitter.gameObject.GetComponent<ParticleSystem>();
         Emitter.Stop();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
         if (Planet != null) 
         {
-      Distance = Vector3.Distance(Planet.transform.position, this.transform.position);
-      thisrigidbody.drag = 10f / Distance;
-      if (thisrigidbody.drag < 0.001f) 
-      {
-          Planet = null;
-      }
+            DeivitFaux DF = Planet.GetComponent<DeivitFaux>();
+            ReadAtmosphere = DF.ActivarAtmosfera;
         }
         
+	}
 
-        if (LanzamientoON == true) 
+
+    void FixedUpdate() 
+    {
+        Speed = new Vector3(thisrigidbody.velocity.x, thisrigidbody.velocity.y, thisrigidbody.velocity.z);
+
+
+        if (Planet != null && ReadAtmosphere == true)
         {
-            
-           
-
-            if (FUEL < 0.1f) { FUEL = 0f;
-            if (Emitter.isPlaying) 
+            Angle = Vector3.Angle(Planet.transform.position, thisrigidbody.position);
+            Distance = Vector3.Distance(Planet.transform.position, this.transform.position);
+            thisrigidbody.drag = 10f / Distance;
+            if (thisrigidbody.drag < 0.001f)
             {
-                Emitter.Stop();
+                Planet = null;
             }
-            FORCE = 0f;
-            } else 
+        }
+
+
+        if (LanzamientoON == true)
+        {
+
+
+
+            if (FUEL < 0.1f)
+            {
+                FUEL = 0f;
+                if (Emitter.isPlaying)
+                {
+                    Emitter.Stop();
+                }
+                FORCE = 0f;
+            }
+            else
             {
                 if (!Emitter.isPlaying)
                 {
                     Emitter.Play();
                 }
-               
+
             }
             showGUI = false;
             FUEL = FUEL - Time.deltaTime;
-            thisrigidbody.AddRelativeForce(FORCE*Vector3.up);
+            thisrigidbody.AddRelativeForce((FORCE) * Vector3.up);
 
 
 
@@ -93,32 +110,37 @@ public class Force : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.A))
         {
-            thisrigidbody.AddRelativeTorque(20f * Vector3.left);
+            thisrigidbody.AddRelativeTorque(RocketTorque * Vector3.left);
 
         }
-             if (Input.GetKey(KeyCode.D)) 
+        if (Input.GetKey(KeyCode.D))
         {
-            thisrigidbody.AddRelativeTorque(20f*Vector3.right);
+            thisrigidbody.AddRelativeTorque(RocketTorque * Vector3.right);
         }
 
-             if (Input.GetKey(KeyCode.W))
-             {
-                 thisrigidbody.AddRelativeTorque(20f * Vector3.forward);
+        if (Input.GetKey(KeyCode.W))
+        {
+            thisrigidbody.AddRelativeTorque(RocketTorque * Vector3.forward);
 
-             }
-             if (Input.GetKey(KeyCode.S))
-             {
-                 thisrigidbody.AddRelativeTorque(20f * Vector3.back);
-             }
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            thisrigidbody.AddRelativeTorque(RocketTorque * Vector3.back);
+        }
 
-             if (Input.GetKey(KeyCode.Q))
-             {
-                 thisrigidbody.AddRelativeTorque(20f * Vector3.up);
+        if (Input.GetKey(KeyCode.Q))
+        {
+            thisrigidbody.AddRelativeTorque(RocketTorque * Vector3.up);
 
-             }
-             if (Input.GetKey(KeyCode.E))
-             {
-                 thisrigidbody.AddRelativeTorque(20f * Vector3.down);
-             }
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            thisrigidbody.AddRelativeTorque(RocketTorque * Vector3.down);
+        }
+    }
+
+	// Update is called once per frame
+	void Update () {
+    
 	}
 }
