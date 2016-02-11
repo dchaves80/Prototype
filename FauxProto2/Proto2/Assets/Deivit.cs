@@ -25,15 +25,28 @@ public class Deivit : MonoBehaviour {
 
         LineRenderer lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.SetVertexCount(numSteps);
-
+        float TIMER1 = 0;
         Vector3 position = initialPosition;
         Vector3 velocity = initialVelocity;
         for (int i = 0; i < numSteps; ++i)
         {
+            TIMER++;
+            
             lineRenderer.SetPosition(i, position);
+        /*   
 
-            position += velocity * timeDelta + 0.5f * gravity * timeDelta * timeDelta;
-            velocity += gravity *timeDelta;
+
+            position += velocity * timeDelta + 0.5f * gravity *timeDelta * timeDelta;*/
+            
+            velocity += gravity  *TIMER1;
+            float angle = Vector3.Angle(position, Planet.transform.position);
+            float x = velocity.x * Mathf.Cos(angle) * TIMER1;
+            float y = velocity.y * Mathf.Sin(angle) - 0.5f * gravity.y * TIMER1 * TIMER1;
+            float z = velocity.z * Mathf.Sin(angle) * TIMER1;
+            position = new Vector3(x, y, z);
+
+           
+
         }
     }
 }
