@@ -50,6 +50,7 @@
      <Compile Include="Assets\DeivitFaux.cs" />
      <Compile Include="Assets\DeivitLaw.cs" />
      <Compile Include="Assets\Force.cs" />
+     <Compile Include="Assets\Kepler.cs" />
      <Compile Include="Assets\PointObject.cs" />
      <Compile Include="Assets\Suriano.cs" />
      <None Include="Assets\FBXS\New Text Document.txt" />
