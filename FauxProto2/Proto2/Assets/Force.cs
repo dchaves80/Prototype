@@ -105,8 +105,25 @@ public class Force : MonoBehaviour {
 
 
         }
+        else 
+        {
+            Emitter.Stop();
+        }
 
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (LanzamientoON == true)
+            {
+                LanzamientoON = false;
+            }
+            else 
+            {
+                if (FUEL > 0f)
+                {
+                    LanzamientoON = true;
+                }
+            }
+        }
 
         if (Input.GetKey(KeyCode.A))
         {

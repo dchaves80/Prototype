@@ -45,7 +45,7 @@ public class DeivitFaux : MonoBehaviour {
             {
 
                 Vector3 dir = transform.position - GO.transform.position;
-                dir = dir.normalized;
+                dir.Normalize();
                 Rigidbody RB = GO.GetComponent<Rigidbody>();
                 DistanceFromCenter = Vector3.Distance(transform.position, GO.transform.position);
                 float Distance = Vector3.Distance(transform.position, GO.transform.position);
